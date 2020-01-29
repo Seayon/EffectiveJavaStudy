@@ -10,6 +10,8 @@ package com.seayon.chapter02.item5;
 
 import org.junit.Test;
 
+import java.util.Arrays;
+
 public class Cu {
 
     //要优先使用基本类型而不是装箱基本类型，要当心无意识的自动装箱
@@ -24,5 +26,11 @@ public class Cu {
         long end = System.currentTimeMillis();
 
         System.out.println("end - start = " + (end - start) + " ms");
+        String[] a = new String[]{"2"};
+        String[] clone = a.clone();
+        a[0]="1";
+        System.out.println(Arrays.deepToString(a));
+        System.out.println(Arrays.deepToString(clone));
+
     }
 }

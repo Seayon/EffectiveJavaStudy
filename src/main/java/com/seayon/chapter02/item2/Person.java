@@ -31,4 +31,28 @@ public class Person {
         return new PersonBuilder();
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Person person = (Person) o;
+
+        if (age != person.age) return false;
+        if (Double.compare(person.score, score) != 0) return false;
+        if (!name.equals(person.name)) return false;
+        return gender.equals(person.gender);
+    }
+
+    @Override
+    public int hashCode() {
+        int result;
+        long temp;
+        result = name.hashCode();
+        result = 31 * result + gender.hashCode();
+        result = 31 * result + age;
+        temp = Double.doubleToLongBits(score);
+        result = 31 * result + (int) (temp ^ (temp >>> 32));
+        return result;
+    }
 }
