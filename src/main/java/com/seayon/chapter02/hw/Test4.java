@@ -1,11 +1,11 @@
 package com.seayon.chapter02.hw;
 
+import java.util.HashMap;
 import java.util.Scanner;
 
 public class Test4 {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-
         String s1 = scanner.nextLine();
         String[] split = s1.split("\\s");
         StringBuilder stringBuilder = new StringBuilder();

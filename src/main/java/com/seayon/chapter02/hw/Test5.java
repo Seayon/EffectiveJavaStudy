@@ -1,7 +1,8 @@
 package com.seayon.chapter02.hw;
 
-import java.util.Arrays;
-import java.util.Scanner;
+import org.junit.Test;
+
+import java.util.*;
 
 public class Test5 {
     public static void main(String[] args) {
@@ -83,5 +84,67 @@ public class Test5 {
             }
         }
         return a;
+    }
+
+    /**
+     * 最长公共前缀
+     *
+     * @param words
+     * @return
+     */
+    public String publicPrefix(String[] words) {
+        if (words.length == 0) {
+            return "";
+        }
+        String min = words[0];
+        for (int i = 1; i < words.length; i++) {
+            if (words[i] == null) {
+                return "";
+            }
+            while (!words[i].startsWith(min)) {
+                if (min.length() == 1) {
+                    return "";
+                } else {
+                    min = min.substring(0, min.length() - 1);
+                }
+            }
+        }
+        return min;
+    }
+
+    @Test
+    public void testPublicPrefix() {
+        String[] words = new String[]{"flow", "flower"};
+        System.out.println(publicPrefix(words));
+    }
+
+    /**
+     * 丢失的筷子
+     * @param l
+     * @return
+     */
+    public int loss(int[] l) {
+        HashSet<Integer> now = new HashSet<>();
+        for (int i = 0; i < l.length; i++) {
+            if (now.contains(l[i])) {
+                now.remove(l[i]);
+            } else {
+                now.add(l[i]);
+            }
+        }
+        Iterator<Integer> iterator = now.iterator();
+        if (iterator.hasNext()) {
+            Integer loss = iterator.next();
+            return loss;
+        } else {
+            return 0;
+        }
+
+    }
+
+    @Test
+    public void testLoss() {
+        int[] a = new int[]{1, 2,1, 2, 3, 3, 4, 4, 5};
+        System.out.println("loss(a) = " + loss(a));
     }
 }
