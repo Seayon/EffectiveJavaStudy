@@ -1,21 +1,13 @@
-package com.seayon.chapter02.item6;
+package com.seayon;
 
+
+import com.seayon.chapter02.item6.Operation;
 import org.junit.Test;
 
-import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.equalTo;
 
 public class MainTest {
-    public static void main(String[] args) {
-        double x = Double.parseDouble(args[0]);
-        double y = Double.parseDouble(args[1]);
-        Operation plus = Operation.valueOf("MINUS");
-        System.out.println(plus.toString());
-
-        for (Operation operation : Operation.values()) {
-            System.out.printf("%f %s %f = %f%n", x, operation, y, operation.apply(x, y));
-        }
-    }
 
     @Test
     public void testA() {
@@ -46,5 +38,14 @@ public class MainTest {
 //        十六进制
         int lA = 0x123;
         int lB = 0x456;
+
+        String all = String.join("/", "1", "2", "3", "4");
+        System.out.println("all = " + all);
+        
+    }
+    
+    @Test
+    public void test(){
+                
     }
 }

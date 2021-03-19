@@ -93,7 +93,8 @@ public class Cu {
         int a = 0101;
         int b = 0102;
         System.out.println(a & b);
-
+        String e = "Java\u2122";
+        String l = 1 + "";
     }
 
 }
