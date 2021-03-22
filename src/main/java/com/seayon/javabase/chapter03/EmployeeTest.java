@@ -2,6 +2,9 @@ package com.seayon.javabase.chapter03;
 
 import org.junit.Test;
 
+import java.lang.reflect.Array;
+import java.util.Objects;
+
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 
@@ -12,7 +15,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
  * @version 1.12 2015-05-08
  */
 public class EmployeeTest {
-    public static void main(String[] args) {
+    public static void main2(String[] args) {
         // fill the staff array with three Employee objects
         Employee[] staff = new Employee[3];
 
@@ -52,5 +55,44 @@ public class EmployeeTest {
         e1 = e2;
         e2 = temp;
     }
+
+    @Test
+    public void testManager(){
+        Manager manager = new Manager("Carl Zhao", 80000, 1994, 06, 15);
+        System.out.println("manager.getSalary() = " + manager.getSalary());
+        manager.setBonus(19999);
+        System.out.println("manager.getSalary() = " + manager.getSalary());
+    }
+
+    @Test
+    public void testObject(){
+        Employee[] staff = new Employee[10];
+        Object obj;
+        obj = staff;
+        obj = new int[10];
+        if (obj.getClass().isArray()) {
+            System.out.println("True = " + true);
+        }
+
+        System.out.println("null == null = " + null == null);
+
+        System.out.println("Objects.equals(null, null) = " + Objects.equals(null, null));
+    }
+
+
+    @Test
+    public void testEquals(){
+        String a = "";
+        int b = 1;
+        System.out.println("a.equals(b) = " + a.equals(b));
+
+    }
+
+    public static void main(String[] args) {
+        String a = "1";
+        Integer integer = 12345678;
+        System.out.println("a.equals(b) = " + a.equals(new Integer("1")));
+    }
+
 }
 
