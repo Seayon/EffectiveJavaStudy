@@ -1,6 +1,7 @@
 package com.seayon.javabase.chapter03;
 
 import java.time.LocalDate;
+import java.util.Date;
 
 /**
  * @BelongProjecet EffectiveJavaStudy
@@ -11,60 +12,80 @@ import java.time.LocalDate;
  * @Version V1.0
  * @Description:
  */
-class Employee
-{
-   private String name;
-   private double salary;
-   private LocalDate hireDay;
+public class Employee implements Cloneable {
+    public void setName(String name) {
+        this.name = name;
+    }
 
-   public Employee(String n, double s, int year, int month, int day)
-   {
-      name = n;
-      salary = s;
-      hireDay = LocalDate.of(year, month, day);
-   }
+    public void setSalary(double salary) {
+        this.salary = salary;
+    }
 
-   public String getName()
-   {
-      return name;
-   }
+    public void setHireDay(LocalDate hireDay) {
+        this.hireDay = hireDay;
+    }
 
-   public double getSalary()
-   {
-      return salary;
-   }
+    private String name;
+    private double salary;
+    private LocalDate hireDay;
+    private Date birthday;
 
-   public LocalDate getHireDay()
-   {
-      return hireDay;
-   }
+    public Date getBirthday() {
+        return birthday;
+    }
 
-   public void raiseSalary(double byPercent)
-   {
-      double raise = salary * byPercent / 100;
-      salary += raise;
-   }
+    public void setBirthday(Date birthday) {
+        this.birthday = birthday;
+    }
 
-   @Override
-   public boolean equals(Object o) {
-      if (this == o) return true;
-      if (o == null || getClass() != o.getClass()) return false;
+    public Employee(String n, double s, int year, int month, int day) {
+        name = n;
+        salary = s;
+        hireDay = LocalDate.of(year, month, day);
+    }
 
-      Employee employee = (Employee) o;
+    public String getName() {
+        return name;
+    }
 
-      if (Double.compare(employee.salary, salary) != 0) return false;
-      if (name != null ? !name.equals(employee.name) : employee.name != null) return false;
-      return hireDay != null ? hireDay.equals(employee.hireDay) : employee.hireDay == null;
-   }
+    public double getSalary() {
+        return salary;
+    }
 
-   @Override
-   public int hashCode() {
-      int result;
-      long temp;
-      result = name != null ? name.hashCode() : 0;
-      temp = Double.doubleToLongBits(salary);
-      result = 31 * result + (int) (temp ^ (temp >>> 32));
-      result = 31 * result + (hireDay != null ? hireDay.hashCode() : 0);
-      return result;
-   }
+    public LocalDate getHireDay() {
+        return hireDay;
+    }
+
+    public void raiseSalary(double byPercent) {
+        double raise = salary * byPercent / 100;
+        salary += raise;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Employee employee = (Employee) o;
+
+        if (Double.compare(employee.salary, salary) != 0) return false;
+        if (name != null ? !name.equals(employee.name) : employee.name != null) return false;
+        return hireDay != null ? hireDay.equals(employee.hireDay) : employee.hireDay == null;
+    }
+
+    @Override
+    public int hashCode() {
+        int result;
+        long temp;
+        result = name != null ? name.hashCode() : 0;
+        temp = Double.doubleToLongBits(salary);
+        result = 31 * result + (int) (temp ^ (temp >>> 32));
+        result = 31 * result + (hireDay != null ? hireDay.hashCode() : 0);
+        return result;
+    }
+
+    public Employee clone() throws CloneNotSupportedException {
+        Employee clone = (Employee) super.clone();
+        return (Employee) clone;
+    }
 }
