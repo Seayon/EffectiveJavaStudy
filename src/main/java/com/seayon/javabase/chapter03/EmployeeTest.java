@@ -3,7 +3,9 @@ package com.seayon.javabase.chapter03;
 import org.junit.Test;
 
 import java.lang.reflect.Array;
+import java.lang.reflect.Constructor;
 import java.util.Objects;
+import java.util.Scanner;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -57,7 +59,7 @@ public class EmployeeTest {
     }
 
     @Test
-    public void testManager(){
+    public void testManager() {
         Manager manager = new Manager("Carl Zhao", 80000, 1994, 06, 15);
         System.out.println("manager.getSalary() = " + manager.getSalary());
         manager.setBonus(19999);
@@ -65,7 +67,7 @@ public class EmployeeTest {
     }
 
     @Test
-    public void testObject(){
+    public void testObject() {
         Employee[] staff = new Employee[10];
         Object obj;
         obj = staff;
@@ -81,18 +83,27 @@ public class EmployeeTest {
 
 
     @Test
-    public void testEquals(){
-        String a = "";
-        int b = 1;
+    public void testEquals() {
+        String a = "299";
+        int b = 299;
         System.out.println("a.equals(b) = " + a.equals(b));
-
     }
 
     public static void main(String[] args) {
         String a = "1";
-        Integer integer = 12345678;
+        Integer integer = 1;
         System.out.println("a.equals(b) = " + a.equals(new Integer("1")));
+        Array.newInstance(Employee.class, 1);
+
     }
+
+    @Test
+    public void testStringEquals(){
+        String s1 = new String("1");
+        String s2 = new String("1");
+        System.out.println(s1 == s2);
+    }
+
 
 }
 

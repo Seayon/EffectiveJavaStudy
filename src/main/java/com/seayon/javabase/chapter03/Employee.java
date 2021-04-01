@@ -84,6 +84,7 @@ public class Employee implements Cloneable {
         return result;
     }
 
+    @Override
     public Employee clone() throws CloneNotSupportedException {
         Employee clone = (Employee) super.clone();
         return (Employee) clone;
