@@ -8,5 +8,15 @@ public class TryOne {
         array1 = null;
         byte[] array2 = new byte[128 * 1024];
         byte[] array3 = new byte[2 * 1024 * 1024];
+        array3 = new byte[2 * 1024 * 1024];
+        array3 = new byte[2 * 1024 * 1024];
+        array3 = new byte[128 * 1024];
+        array3 = null;
+
+        byte[] array4 = new byte[2 * 1024 * 1024];
+
+
+
+
     }
 }
