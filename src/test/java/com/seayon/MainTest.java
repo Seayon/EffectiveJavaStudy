@@ -93,12 +93,12 @@ public class MainTest {
 
     @Test
     public void testB() {
-        assertThat(addBefore(2), equalTo(1));// 断言当 n=2 时,返回结果是 1
-        assertThat(addBefore(3), equalTo(1));
-        assertThat(addBefore(4), equalTo(2));
-        assertThat(addBefore(5), equalTo(4));
-        assertThat(addBefore(6), equalTo(7));// 断言当 n=6 时,返回结果是 7
-        int i = addBefore(10000);
+//        assertThat(addBefore(2), equalTo(1));// 断言当 n=2 时,返回结果是 1
+//        assertThat(addBefore(3), equalTo(1));
+//        assertThat(addBefore(4), equalTo(2));
+//        assertThat(addBefore(5), equalTo(4));
+//        assertThat(addBefore(6), equalTo(7));// 断言当 n=6 时,返回结果是 7
+        int i = addBefore(4000);
         System.out.println(i);
     }
 
