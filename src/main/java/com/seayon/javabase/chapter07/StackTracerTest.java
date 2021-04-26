@@ -1,6 +1,7 @@
 package com.seayon.javabase.chapter07;
 
 import java.util.Scanner;
+import java.util.logging.Logger;
 
 public class StackTracerTest {
     public static int factorial(int n) {
@@ -23,5 +24,7 @@ public class StackTracerTest {
         Scanner scanner = new Scanner(System.in);
         System.out.println("输入数字");
         factorial(scanner.nextInt());
+        Logger.getGlobal().info("数字");
+
     }
 }

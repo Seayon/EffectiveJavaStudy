@@ -1,6 +1,7 @@
 package com.seayon.javabase.chapter06;
 
 import com.seayon.javabase.chapter03.Employee;
+import com.seayon.javabase.chapter08.Pair;
 import org.junit.Test;
 
 import java.awt.event.ActionEvent;
@@ -23,6 +24,7 @@ public class LengthComparator implements Comparator<String> {
     @Test
     public void t() {
         Comparator comparator = new LengthComparator();
+        Pair comparator1 = (Pair<String>) comparator;
 
         int compare = comparator.compare("s1", "s2");
         assertThat(compare, equalTo(0));

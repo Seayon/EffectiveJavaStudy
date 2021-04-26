@@ -26,6 +26,7 @@ public class OOMMetaspace {
             });
             Car car = (Car) enhancer.create();
             car.run();
+            assert counter != 0;
         }
     }
 
