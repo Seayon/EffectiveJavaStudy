@@ -52,7 +52,6 @@ public class LinkedListTest {
             add("Cal");
             add("Erica");
         }};
-
         List<String> bIter = new LinkedList<String>() {{
             add("Bob");
             add("Doug");
