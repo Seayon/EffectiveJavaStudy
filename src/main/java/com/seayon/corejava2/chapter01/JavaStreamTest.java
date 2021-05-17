@@ -257,6 +257,7 @@ public class JavaStreamTest {
         System.out.println("any = " + any);
         boolean b = products.parallelStream().anyMatch(product -> product.getName().endsWith("3"));
         System.out.println("b = " + b);
+
     }
 
 
