@@ -3,24 +3,18 @@ package com.seayon.corejava2.chapter01;
 import com.seayon.chapter02.item2.Person;
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.Getter;
 import org.junit.Test;
 
 import java.io.IOException;
-import java.io.Serializable;
 import java.math.BigInteger;
 import java.net.URISyntaxException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
-import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.*;
-import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentSkipListSet;
 import java.util.function.Function;
 import java.util.function.Predicate;
-import java.util.function.ToIntFunction;
-import java.util.stream.BaseStream;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
@@ -161,19 +155,24 @@ public class JavaStreamTest {
     @Data
     @AllArgsConstructor
     class Product {
-        private String id;
+        private Integer id;
         private String name;
+
+        // @Override
+        // public int compareTo(@NotNull JavaStreamTest.Product o) {
+        //     return this.getId().compareTo(o.getId());
+        // }
     }
 
     @Test
     public void testDistinct() {
         List<Product> products = new ArrayList<Product>() {{
-            add(new Product("2", "牛排 2"));
-            add(new Product("4", "牛排 4"));
-            add(new Product("3", "牛排 3"));
-            add(new Product("1", "牛排 1"));
-            add(new Product("1", "牛排 1"));
-            add(new Product("2", "牛排 2"));
+            add(new Product(2, "牛排 2"));
+            add(new Product(4, "牛排 4"));
+            add(new Product(3, "牛排 3"));
+            add(new Product(1, "牛排 1"));
+            add(new Product(1, "牛排 1"));
+            add(new Product(2, "牛排 2"));
         }};
 
         products.stream().unordered().filter(distinctByKey(b -> b.getId())).collect(Collectors.toList()).forEach(System.out::print);
@@ -184,6 +183,82 @@ public class JavaStreamTest {
         return t -> set.add(keyExtractor.apply(t));
 
     }
+
+    /**
+     * 流的 sort 方法
+     */
+
+    @Test
+    public void testSort() {
+        Stream<String> concat = Stream.concat(
+                Stream.of("4", "1", "2"),
+                Stream.of("7", "3", "5"));
+
+        Stream<String> sorted = concat.sorted();
+        System.out.println("sorted.collect(Collectors.joining(\",\")) = " + sorted.collect(Collectors.joining(",")));
+
+        List<Product> products = new ArrayList<Product>() {{
+            add(new Product(2, "牛排 22"));
+            add(new Product(4, "牛排 4"));
+            add(new Product(3, "牛排 3"));
+            add(new Product(1, "牛排 1"));
+            add(new Product(1, "牛排 1"));
+            add(new Product(3, "牛排 29"));
+        }};
+        //连续多个比较的时候,语法上第一个比较里面 必须指定类型 (Product product)
+        products.stream().sorted(Comparator.comparing(
+                (Product product) -> product.name)
+                .thenComparing(Product::getId))
+                .forEach(System.out::println);
+
+
+    }
+
+    @Test
+    public void testPeek(){
+        List<Product> products = new ArrayList<Product>() {{
+            add(new Product(2, "牛排 22"));
+            add(new Product(4, "牛排 4"));
+            add(new Product(3, "牛排 3"));
+            add(new Product(1, "牛排 1"));
+            add(new Product(1, "牛排 1"));
+            add(new Product(3, "牛排 29"));
+        }};
+        Stream<Product> peek = products.stream().peek(product -> {
+            System.out.println("product.getName() = " + product.getName());
+        });
+        //这一句执行的时候才打印
+        peek.count();
+
+    }
+
+    /**
+     * 测试 Optional
+     */
+    @Test
+    public void testMaxAnd(){
+        List<Product> products = new ArrayList<Product>() {{
+            add(new Product(2, "牛排 22"));
+            add(new Product(4, "牛排 4"));
+            add(new Product(3, "牛排 3"));
+            add(new Product(1, "牛排 1"));
+            add(new Product(1, "牛排 1"));
+            add(new Product(3, "牛排 29"));
+        }};
+        Stream<Product> peek = products.stream().peek(product -> {
+            System.out.println("product.getName() = " + product.getName());
+        });
+
+        Optional<Product> max = peek.max(Comparator.comparing((Product::getName)));
+        Optional<Product> first = products.stream().findFirst();
+        System.out.println("max = " + max);
+        System.out.println("first = " + first);
+        Optional<Product> any = products.parallelStream().filter(product -> product.getName().endsWith("9")).findAny();
+        System.out.println("any = " + any);
+        boolean b = products.parallelStream().anyMatch(product -> product.getName().endsWith("3"));
+        System.out.println("b = " + b);
+    }
+
 
 }
 
