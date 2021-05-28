@@ -11,12 +11,14 @@ package com.seayon.designpattern.start.singlePattern;
  */
 
 public class DLCSingleton {
-    public static DLCSingleton dlcSingleton = null;
+    private static DLCSingleton dlcSingleton = null;
+
+    private static Object lock = new Object();
 
     private DLCSingleton() {
     }
 
-    public static DLCSingleton getInstance() {
+    public static DLCSingleton getInstanceWithClassLock() {
         if (dlcSingleton == null) {
             synchronized (DLCSingleton.class) {
                 dlcSingleton = new DLCSingleton();
@@ -25,9 +27,9 @@ public class DLCSingleton {
         return dlcSingleton;
     }
 
-    public DLCSingleton getDlcSingleton() {
+    public static DLCSingleton getDlcSingletonWithObjectLock() {
         if (dlcSingleton == null) {
-            synchronized (this) {
+            synchronized (lock) {
                 if (dlcSingleton == null) {
                     dlcSingleton = new DLCSingleton();
                 }

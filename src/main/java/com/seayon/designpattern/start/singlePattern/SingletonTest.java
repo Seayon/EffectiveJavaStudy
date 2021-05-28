@@ -15,8 +15,9 @@ import org.junit.Test;
 public class SingletonTest {
     public static void main(String[] args) {
 
-        for (int i = 0; i < 10; i++) {
-            Thread myThread = new MyThreadHungry();
+
+        for (int i = 0; i < 100; i++) {
+            Thread myThread = new MyThreadDLC();
             myThread.start();
         }
         while (true) {
