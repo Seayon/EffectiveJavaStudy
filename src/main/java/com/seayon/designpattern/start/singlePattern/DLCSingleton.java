@@ -10,7 +10,12 @@ package com.seayon.designpattern.start.singlePattern;
  * @Description: 双重锁机制来新建
  */
 
-public class DLCSingleton {
+public class DLCSingleton implements Cloneable{
+
+    public DLCSingleton clone() throws CloneNotSupportedException{
+        return dlcSingleton;
+    }
+
     private static DLCSingleton dlcSingleton = null;
 
     private static Object lock = new Object();
@@ -18,6 +23,7 @@ public class DLCSingleton {
     private DLCSingleton() {
     }
 
+//    锁对象的单例模式,饱汉模式
     public static DLCSingleton getInstanceWithClassLock() {
         if (dlcSingleton == null) {
             synchronized (DLCSingleton.class) {
