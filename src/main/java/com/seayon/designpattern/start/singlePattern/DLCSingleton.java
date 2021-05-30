@@ -23,7 +23,7 @@ public class DLCSingleton implements Cloneable{
     private DLCSingleton() {
     }
 
-//    锁对象的单例模式,饱汉模式
+//    锁类的单例模式,饱汉模式
     public static DLCSingleton getInstanceWithClassLock() {
         if (dlcSingleton == null) {
             synchronized (DLCSingleton.class) {
@@ -34,7 +34,7 @@ public class DLCSingleton implements Cloneable{
         }
         return dlcSingleton;
     }
-
+//  锁对象的单例模式
     public static DLCSingleton getDlcSingletonWithObjectLock() {
         if (dlcSingleton == null) {
             synchronized (lock) {
