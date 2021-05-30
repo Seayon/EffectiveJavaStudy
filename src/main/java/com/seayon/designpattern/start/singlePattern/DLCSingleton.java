@@ -1,5 +1,7 @@
 package com.seayon.designpattern.start.singlePattern;
 
+import java.io.Serializable;
+
 /**
  * @BelongProjecet EffectiveJavaStudy
  * @BelongPackage com.seayon.designpattern.start.singlePattern
@@ -10,9 +12,26 @@ package com.seayon.designpattern.start.singlePattern;
  * @Description: 双重锁机制来新建
  */
 
-public class DLCSingleton implements Cloneable{
+public class DLCSingleton implements Cloneable, Serializable {
 
-    public DLCSingleton clone() throws CloneNotSupportedException{
+    private static volatile boolean firstCreate = true;
+
+    /**
+     * 防止序列化攻击
+     *
+     * @return
+     */
+    private Object readResolve() {
+        return dlcSingleton;
+    }
+
+    /**
+     * 防止 clone 攻击
+     *
+     * @return
+     * @throws CloneNotSupportedException
+     */
+    public DLCSingleton clone() throws CloneNotSupportedException {
         return dlcSingleton;
     }
 
@@ -21,20 +40,30 @@ public class DLCSingleton implements Cloneable{
     private static volatile Object lock = new Object();
 
     private DLCSingleton() {
+//        如果不是第一次创建,报错
+        if (!firstCreate) {
+            throw new RuntimeException("对象已存在");
+        }
+
+        if (dlcSingleton != null) {
+            throw new RuntimeException("对象已存在");
+        }
     }
 
-//    锁类的单例模式,饱汉模式
+    //    锁类的单例模式,饱汉模式
     public static DLCSingleton getInstanceWithClassLock() {
         if (dlcSingleton == null) {
             synchronized (DLCSingleton.class) {
                 if (dlcSingleton == null) {
                     dlcSingleton = new DLCSingleton();
+                    firstCreate = false;
                 }
             }
         }
         return dlcSingleton;
     }
-//  锁对象的单例模式
+
+    //  锁对象的单例模式
     public static DLCSingleton getDlcSingletonWithObjectLock() {
         if (dlcSingleton == null) {
             synchronized (lock) {
@@ -45,4 +74,5 @@ public class DLCSingleton implements Cloneable{
         }
         return dlcSingleton;
     }
+
 }
