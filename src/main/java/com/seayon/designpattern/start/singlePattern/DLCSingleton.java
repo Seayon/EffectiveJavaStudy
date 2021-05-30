@@ -16,9 +16,9 @@ public class DLCSingleton implements Cloneable{
         return dlcSingleton;
     }
 
-    private static DLCSingleton dlcSingleton = null;
+    private static volatile DLCSingleton dlcSingleton = null;
 
-    private static Object lock = new Object();
+    private static volatile Object lock = new Object();
 
     private DLCSingleton() {
     }
@@ -27,7 +27,9 @@ public class DLCSingleton implements Cloneable{
     public static DLCSingleton getInstanceWithClassLock() {
         if (dlcSingleton == null) {
             synchronized (DLCSingleton.class) {
-                dlcSingleton = new DLCSingleton();
+                if (dlcSingleton == null) {
+                    dlcSingleton = new DLCSingleton();
+                }
             }
         }
         return dlcSingleton;
