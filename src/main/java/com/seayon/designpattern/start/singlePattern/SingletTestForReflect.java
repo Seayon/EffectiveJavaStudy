@@ -3,6 +3,9 @@ package com.seayon.designpattern.start.singlePattern;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 
+import static org.hamcrest.CoreMatchers.equalTo;
+import static org.junit.Assert.assertThat;
+
 public class SingletTestForReflect {
     public static void main(String[] args) {
 
