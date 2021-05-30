@@ -1,4 +1,4 @@
-package com.seayon.designpattern.start.builderPatter;
+package com.seayon.designpattern.start.builder;
 
 public class BuilderTest {
     public static void main(String[] args) {

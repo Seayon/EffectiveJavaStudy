@@ -1,4 +1,4 @@
-package com.seayon.designpattern.start.builderPatter;
+package com.seayon.designpattern.start.builder;
 
 import java.util.StringJoiner;
 
