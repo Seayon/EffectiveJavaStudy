@@ -4,7 +4,7 @@ import java.security.ProtectionDomain;
 
 public class FactoryTest {
     public static void main(String[] args) {
-        String className = "com.seayon.designpattern.start.factoryMethod.Product2CreateFactory";
+        String className = "com.seayon.designpattern.start.factoryMethod.Product3CreateFactory";
 
         try {
             Class<?> c = Class.forName(className);
